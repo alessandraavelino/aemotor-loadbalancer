@@ -1,0 +1,48 @@
+# Criar um Load Balancer com o Nginx que contenham 4 nós 
+# e utilize o algoritmo de Round Robin. A configuração 
+# do ambiente de execução deverá ser realizada no Docker Compose.
+
+services:
+  loadbalancer:
+      image: nginx:latest
+      container_name: aemotor-loadbalancer
+      volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx
+      ports:
+        - "8000:80"
+  node1:
+    build: .
+    container_name: node1
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx
+    ports:
+      - "80"
+
+  node2:
+    build: .
+    container_name: node2
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx
+    ports:
+      - "80"
+
+  node3:
+    build: .
+    container_name: node3
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx
+    ports:
+      - "80"
+
+  node4:
+    build: .
+    container_name: node4
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx
+    ports:
+      - "80"
